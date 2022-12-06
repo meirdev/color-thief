@@ -1,6 +1,6 @@
 import cv2
 
-from .algo import Counter, KMeans, Regular
+from .algo import Counter, KMeans, Octree, Regular
 from .types import RGB
 
 
@@ -16,5 +16,7 @@ def factory(path: str, algo: str, colors: int) -> Counter:
             algo = KMeans("LAB")
         case "regular":
             algo = Regular()
+        case "octree":
+            algo = Octree()
 
     return algo.run(cv2.imread(path, cv2.IMREAD_UNCHANGED), colors)

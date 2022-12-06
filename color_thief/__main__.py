@@ -16,7 +16,7 @@ def main() -> None:
         "--algo",
         default="kmeans[RGB]",
         help="Algorithm to use",
-        choices=["kmeans[RGB]", "kmeans[LAB]", "regular"],
+        choices=["kmeans[RGB]", "kmeans[LAB]", "regular", "octree", "median_cut"],
     )
     arg_parser.add_argument("-o", "--output", help="Path to output file")
 

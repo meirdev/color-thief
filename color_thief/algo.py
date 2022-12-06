@@ -1,10 +1,12 @@
 import abc
+import collections
 from typing import Literal, TypeAlias
 
 import cv2
 import numpy as np
 from sklearn.cluster import MiniBatchKMeans
 
+from .libs import octree_quantizer
 from .types import RGB
 
 Counter: TypeAlias = dict[RGB, int]
@@ -65,7 +67,25 @@ class Regular(Algo):
 
 class Octree(Algo):
     def run(self, image: np.ndarray, colors: int) -> Counter:
-        pass
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+        octree = octree_quantizer.OctreeQuantizer()
+
+        for h in range(image.shape[1]):
+            for w in range(image.shape[0]):
+                octree.add_color(octree_quantizer.Color(*image[w, h]))
+
+        palette = octree.make_palette(256)
+
+        counter = collections.Counter()
+
+        for h in range(image.shape[1]):
+            for w in range(image.shape[0]):
+                index = octree.get_palette_index(octree_quantizer.Color(*image[w, h]))
+                color = palette[index]
+                counter[(color.red, color.green, color.blue)] += 1
+
+        return dict(counter.most_common(colors))
 
 
 class MedianCut(Algo):
