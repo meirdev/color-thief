@@ -1,6 +1,6 @@
 # Color Thief
 
-Extract a color palette from an image.
+Extract a color palette from an image. Inspired by <https://github.com/fengsp/color-thief-py>
 
 ## Usage
 
