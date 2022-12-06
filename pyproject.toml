@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "color-thief"
+version = "0.1.0"
+description = ""
+authors = ["meirdev <maornet@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+rich = "^12.6.0"
+numpy = "^1.23.5"
+opencv-python = "^4.6.0"
+scikit-learn = "^1.1.3"
+
+[tool.poetry.dev-dependencies]
+black = "^22.10.0"
+pytest-cov = "^4.0.0"
+mypy = "^0.991"
+pytest = "^7.2.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
