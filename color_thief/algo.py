@@ -43,14 +43,14 @@ class KMeans(Algo):
         clt = MiniBatchKMeans(n_clusters=colors, random_state=0)
         labels = clt.fit_predict(image)
         quant = clt.cluster_centers_.astype("uint8")[labels]
-        unique_result = np.unique(quant, return_counts=True, axis=0)
+        values, counts = np.unique(quant, return_counts=True, axis=0)
 
         if self._convert[1]:
             values = values.reshape((1, *values.shape))
             values = cv2.cvtColor(values, self._convert[1])
             values = values.reshape(*values.shape[1:])
 
-        return counter(unique_result, colors)
+        return counter((values, counts), colors)
 
 
 class Regular(Algo):
